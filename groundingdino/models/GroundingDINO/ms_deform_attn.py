@@ -242,6 +242,7 @@ class MultiScaleDeformableAttention(nn.Module):
         level_start_index: Optional[torch.Tensor] = None,
         **kwargs
     ) -> torch.Tensor:
+        global _C
 
         """Forward Function of MultiScaleDeformableAttention
 
@@ -354,7 +355,6 @@ class MultiScaleDeformableAttention(nn.Module):
                     or "invalid device function" in msg
                     or "ms_deformable_im2col_cuda" in msg
                 ):
-                    global _C
                     _C = None
                     warnings.warn(
                         "GroundingDINO custom CUDA ops are incompatible with this GPU; "
