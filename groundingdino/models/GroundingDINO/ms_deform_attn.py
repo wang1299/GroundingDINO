@@ -25,9 +25,11 @@ from torch.autograd import Function
 from torch.autograd.function import once_differentiable
 from torch.nn.init import constant_, xavier_uniform_
 
+_C = None
 try:
-    from groundingdino import _C
-except:
+    from groundingdino import _C as _C_ext
+    _C = _C_ext
+except Exception:
     _C = None
     warnings.warn("Failed to load custom C++ ops. Running on CPU mode Only!")
 
